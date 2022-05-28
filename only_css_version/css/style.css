@@ -59,7 +59,7 @@ div {
 }
 
 .btn-container {
-    margin-bottom: 30px;
+    margin-bottom: 19px;
     margin-left: auto;
     margin-right: auto;
     position: relative;
@@ -74,11 +74,12 @@ div {
     display: inline-block;
     font-size: 18px;
     font-weight: bold;
-    height: 60px;
-    line-height: 60px;
-    margin: 0 13px;
+    height: 70px;
+    line-height: 70px;
+    margin: 0 5px;
     text-align: center;
-    width: 60px;
+    width: 70px;
+    border: 1px solid rgb(40, 45, 45);
 }
 
 .btn:hover {
@@ -88,14 +89,14 @@ div {
 
 #ac-btn {
     margin-left: -169px;
-    width: 150px;
+    width: 156px;
 }
 
 #division-btn {
     position: absolute;
-    right: 21px;
+    right: 29px;
 }
 
 #zero-btn, #equals-btn {
-    width: 150px;
+    width: 156px;
 }
