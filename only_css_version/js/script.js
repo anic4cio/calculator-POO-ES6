@@ -21,39 +21,31 @@ class Calculator {
         }
     }
 
-    // soma
     sum(n1, n2) {
         return parseFloat(n1) + parseFloat(n2)
     }
 
-    // subtração
     subtraction(n1, n2) {
         return parseFloat(n1) - parseFloat(n2)
     }
 
-    // multiplicação
     multiplication(n1, n2) {
         return parseFloat(n1) * parseFloat(n2)
     }
 
-    // divisão
     division(n1, n2) {
         return parseFloat(n1) / parseFloat(n2)
     }
 
-    // atualiza os valores
     refreshValues(total) {
         this.upperValue.textContent = total;
         this.resultValue.textContent = total;
     }
 
-    // resolve a operação
-    resolution() {
+    solve() {
 
-        // transforma a string num array
+        // turn string into an array
         let upperValueArray = (this.upperValue.textContent).split(' ');
-
-        // resultado da operação
         let result = 0;
 
         for(let i = 0; i <= upperValueArray.length; i++) {
@@ -61,17 +53,20 @@ class Calculator {
             let operation = 0;
             let actualItem = upperValueArray[i];
 
-            // executa a multiplicação
+            // run the multiplication
             if(actualItem == 'x') {
                 result = calc.multiplication(upperValueArray[i - 1], upperValueArray[i + 1]);
                 operation = 1;
-            // executa a divisão
+
+            // run the division
             } else if (actualItem == '÷'){
                 result = calc.division(upperValueArray[i - 1], upperValueArray[i + 1]);
                 operation = 1;
-            // checa se tem multiplicação e divisão para ser feita no array
+
+            // checks if there is still division or multiplication to be done
             } else if(!upperValueArray.includes('x') && !upperValueArray.includes('÷')) {
-            // soma e subtração
+
+            // and now run the sum and subtraction
                 if(actualItem == '+') {
                     result = calc.sum(upperValueArray[i - 1], upperValueArray[i + 1]);
                     operation = 1;
@@ -81,26 +76,24 @@ class Calculator {
                 }
             }
             
-            // atualiza valores do array para a próxima iteração
+            // updates array values for next iteration
             if(operation) {
                 
-                // tranforma o indice anterior no resultado atual da operação
+                // turn the previous index into current of operation
                 upperValueArray[i - 1] = result;
                 
-                // remove os itens já utilizados para operação
+                // remove items already used for operation
                 upperValueArray.splice(i, 2);
                 
-                //atualiza o valor do índice
+                // refresh the index value
                 i = 0;
             }
         }
-
-
+        
+        // refresh the result
         if(result) {
             calc.reset = 1;
         }
-
-        // atualiza os totais
         calc.refreshValues(result);
     }
 
@@ -108,30 +101,30 @@ class Calculator {
         let input = this.textContent;
         let upperValue = calc.upperValue.textContent;
 
-        // virifica se o input é um número
+        // check if the input is a number
         var reg = new RegExp('^\\d+$');
 
-        // limpa o display quando resetar a operação
+        // clear screen when reset operation
         if(calc.reset && reg.test(input)) {
             upperValue = '0';
         } 
 
-        // limpa a propriedade de reset
+        // clear the reset property
         calc.reset = 0;
 
-        // limpa o display quando AC é pressionado
+        // clear the screen when AC is pressed
         if(input == 'AC') {
             calc.clearValues();
         } else if (input == '=') {
-            calc.resolution();
+            calc.solve();
         } else {
 
-            // verifica se último caractera é número ou símbolo
+            // check if last character is symbol or number
             if(calc.checkLastDigit(input, upperValue, reg)) {
                 return false;
             }
             
-            // adiciona espaços ao lado dos simbolos
+            // add spaces nest to symbols
             if(!reg.test(input)) {
                 input = ` ${input} `;
             }
@@ -147,14 +140,11 @@ class Calculator {
     }
 }
 
-// nova instância da classe Calculator
 let calc = new Calculator;
 
-// 
 let buttons = document.getElementsByClassName('btn');
 
 // map all buttons
 for(let i = 0; buttons.length > i; i++) {
     buttons[i].addEventListener('click', calc.btnPress);
-
 }
