@@ -23,11 +23,11 @@ div {
 #calculator {
     background-color: rgb(27, 25, 50);
     border: 1px solid darkgoldenrod;
-    height: 520px;
+    height: 527px;
     margin-left: auto;
     margin-right: auto;
-    padding-bottom: 60px;
-    padding-top: 38px;
+    padding-bottom: 80px;
+    padding-top: 15px;
     width: 400px;
 }
 
@@ -44,6 +44,7 @@ div {
     overflow: hidden;
     white-space: nowrap;
     width: 332px;
+    margin-top: 30px;
 }
 
 #upper-number, #result-number {
@@ -99,4 +100,9 @@ div {
 
 #zero-btn, #equals-btn {
     width: 156px;
+}
+
+#dev, #brand {
+    text-align: center;
+    color: rgb(100, 100, 100);
 }
