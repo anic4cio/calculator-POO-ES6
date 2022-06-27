@@ -11,10 +11,10 @@ class Calculator {
     }
 
     // check if last character is symbol
-    checkLastDigit(input, upperValue, reg) {
+    checkLastDigit(input, upperValue, regex) {
         if((
-            !reg.test(input) &&
-            !reg.test(upperValue.substr(upperValue.length - 1))
+            !regex.test(input) &&
+            !regex.test(upperValue.substr(upperValue.length - 1))
         )) {
             return true;
         } else {
@@ -45,40 +45,40 @@ class Calculator {
 
     solve() {
 
-        // turn string into an array
+        // turn string with numbers and symbols into an array
         let upperValueArray = (this.upperValue.textContent).split(' ');
         let result = 0;
 
         for(let i = 0; i <= upperValueArray.length; i++) {
 
-            let operation = 0;
+            let operationIndex = 0;
             let actualItem = upperValueArray[i];
 
             // run the multiplication
-            if(actualItem == 'x') {
+            if(actualItem === 'x') {
                 result = calc.multiplication(upperValueArray[i - 1], upperValueArray[i + 1]);
-                operation = 1;
+                operationIndex = 1;
 
             // run the division
-            } else if (actualItem == '÷'){
+            } else if (actualItem === '÷'){
                 result = calc.division(upperValueArray[i - 1], upperValueArray[i + 1]);
-                operation = 1;
+                operationIndex = 1;
 
             // checks if there is still division or multiplication to be done
             } else if(!upperValueArray.includes('x') && !upperValueArray.includes('÷')) {
 
             // and now run the addition and subtraction
-                if(actualItem == '+') {
+                if(actualItem === '+') {
                     result = calc.addition(upperValueArray[i - 1], upperValueArray[i + 1]);
-                    operation = 1;
-                } else if(actualItem == '-') {
+                    operationIndex = 1;
+                } else if(actualItem === '-') {
                     result = calc.subtraction(upperValueArray[i - 1], upperValueArray[i + 1]);
-                    operation = 1;
+                    operationIndex = 1;
                 }
             }
             
             // updates array values for next iteration
-            if(operation) {
+            if(operationIndex) {
                 
                 // turn the previous index into current of operation
                 upperValueArray[i - 1] = result;
@@ -91,22 +91,24 @@ class Calculator {
             }
         }
         
-        // refresh the result
+        // reset the upperValue if still there are numbers of last operation
         if(result) {
             calc.reset = 1;
         }
+
+        // update both values with result
         calc.refreshValues(result);
     }
 
-    btnPress() {
+    buttonPress() {
         let input = this.textContent;
         let upperValue = calc.upperValue.textContent;
 
-        // check if the input is a number
-        var reg = new RegExp('^\\d+$');
+        // return true if the input is a number
+        var regex = new RegExp('^\\d+$');
 
         // clear screen when reset operation
-        if(calc.reset && reg.test(input)) {
+        if(calc.reset && regex.test(input)) {
             upperValue = '0';
         } 
 
@@ -114,25 +116,25 @@ class Calculator {
         calc.reset = 0;
 
         // clear the screen when AC is pressed
-        if(input == 'AC') {
+        if(input === 'AC') {
             calc.clearValues();
-        } else if (input == '=') {
+        } else if (input === '=') {
             calc.solve();
         } else {
 
             // check if last character is symbol
-            if(calc.checkLastDigit(input, upperValue, reg)) {
+            if(calc.checkLastDigit(input, upperValue, regex)) {
                 return false;
             }
             
             // add spaces around symbols
-            if(!reg.test(input)) {
+            if(!regex.test(input)) {
                 input = ` ${input} `;
             }
 
             // remove 0 when adding numbers
-            if(upperValue == '0') {
-                if(reg.test(input)) {
+            if(upperValue === '0') {
+                if(regex.test(input)) {
                     calc.upperValue.textContent = input;
                 }
             } else {
@@ -148,5 +150,5 @@ let buttons = document.getElementsByClassName('btn');
 
 // map all buttons
 for(let i = 0; buttons.length > i; i++) {
-    buttons[i].addEventListener('click', calc.btnPress);
+    buttons[i].addEventListener('click', calc.buttonPress);
 }
