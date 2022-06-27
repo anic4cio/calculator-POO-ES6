@@ -10,6 +10,7 @@ class Calculator {
         this.resultValue.textContent = '0';
     }
 
+    // check if last character is symbol
     checkLastDigit(input, upperValue, reg) {
         if((
             !reg.test(input) &&
@@ -21,7 +22,7 @@ class Calculator {
         }
     }
 
-    sum(n1, n2) {
+    addition(n1, n2) {
         return parseFloat(n1) + parseFloat(n2)
     }
 
@@ -66,9 +67,9 @@ class Calculator {
             // checks if there is still division or multiplication to be done
             } else if(!upperValueArray.includes('x') && !upperValueArray.includes('÷')) {
 
-            // and now run the sum and subtraction
+            // and now run the addition and subtraction
                 if(actualItem == '+') {
-                    result = calc.sum(upperValueArray[i - 1], upperValueArray[i + 1]);
+                    result = calc.addition(upperValueArray[i - 1], upperValueArray[i + 1]);
                     operation = 1;
                 } else if(actualItem == '-') {
                     result = calc.subtraction(upperValueArray[i - 1], upperValueArray[i + 1]);
@@ -119,16 +120,17 @@ class Calculator {
             calc.solve();
         } else {
 
-            // check if last character is symbol or number
+            // check if last character is symbol
             if(calc.checkLastDigit(input, upperValue, reg)) {
                 return false;
             }
             
-            // add spaces nest to symbols
+            // add spaces around symbols
             if(!reg.test(input)) {
                 input = ` ${input} `;
             }
 
+            // remove 0 when adding numbers
             if(upperValue == '0') {
                 if(reg.test(input)) {
                     calc.upperValue.textContent = input;
