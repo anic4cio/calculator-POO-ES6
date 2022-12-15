@@ -1,6 +1,6 @@
 # Object Oriented Calculator 📱
 
-* <a href="https://anic4cio.github.io/calculator-poo/only_css_version/" target="_blank" rel="noopener noreferrer">Click here to access the calculator by GitHub Pages</a>
+* <a href="https://anic4cio.github.io/calculator-poo/src/" target="_blank" rel="noopener noreferrer">Click here to access the calculator</a>
  
 ## _**My first calculator that was created with Javascript, HTML and CSS.**_ 🇧🇷
 
