@@ -1,0 +1,22 @@
+{
+  "name": "calculator-poo",
+  "version": "1.0.0",
+  "description": "Oriented Object Calculator from my very beginin",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anic4cio/calculator-poo.git"
+  },
+  "author": "Vinicius Anic4cio",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/anic4cio/calculator-poo/issues"
+  },
+  "homepage": "https://github.com/anic4cio/calculator-poo#readme",
+  "devDependencies": {
+    "eslint": "^8.29.0"
+  }
+}
